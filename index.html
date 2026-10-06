@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="theme-color" content="#0f766e">
+  <meta name="description" content="Fresh groceries delivered to your doorstep.">
+  <title>Apni Kirana — Online Grocery Store</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <button class="icon-btn mobile-menu" id="menuBtn" aria-label="Open menu">☰</button>
+      <a class="brand" href="#home" data-page="home">
+        <span class="brand-mark">🛒</span>
+        <span><b>Apni Kirana</b><small>Fresh • Fast • Local</small></span>
+      </a>
+      <div class="desktop-search search-wrap">
+        <span>⌕</span><input id="desktopSearch" type="search" placeholder="Search groceries...">
+      </div>
+      <div class="header-actions">
+        <button class="voice-btn" id="voiceToggle" title="Toggle Hindi voice">🔊</button>
+        <button class="icon-btn cart-icon" data-page="cart" aria-label="Cart">🛒<span id="cartCount">0</span></button>
+      </div>
+    </div>
+    <div class="mobile-search search-wrap">
+      <span>⌕</span><input id="mobileSearch" type="search" placeholder="Search rice, oil, biscuits...">
+    </div>
+    <nav class="desktop-nav">
+      <a href="#home" data-page="home">Home</a>
+      <a href="#shop" data-page="shop">Shop</a>
+      <a href="#track" data-page="track">Track Order</a>
+      <a href="#admin" data-page="admin">Shop Owner</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- HOME -->
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <div class="hero-copy">
+          <span class="eyebrow">YOUR LOCAL ONLINE KIRANA</span>
+          <h1>Daily essentials,<br><span>delivered simply.</span></h1>
+          <p>Fresh groceries, fair prices and direct ordering from your local shop.</p>
+          <div class="hero-buttons">
+            <button class="primary-btn" data-page="shop">Shop Now →</button>
+            <button class="secondary-btn" id="heroWhatsApp">💬 WhatsApp Us</button>
+          </div>
+          <div class="hero-trust"><span>✓ COD</span><span>✓ UPI</span><span>✓ Local delivery</span></div>
+        </div>
+        <div class="hero-art">
+          <div class="hero-circle"></div>
+          <div class="hero-bag">🛍️</div>
+          <span class="float-card fc1">🥬 Fresh</span>
+          <span class="float-card fc2">⚡ Fast</span>
+          <span class="float-card fc3">₹ Best Price</span>
+        </div>
+      </div>
+
+      <div class="section container">
+        <div class="section-head"><div><span class="eyebrow">SHOP BY</span><h2>Categories</h2></div><button class="text-btn" data-page="shop">View all →</button></div>
+        <div class="category-grid" id="categoryGrid"></div>
+      </div>
+
+      <div class="section soft-section">
+        <div class="container">
+          <div class="section-head"><div><span class="eyebrow">CUSTOMER FAVOURITES</span><h2>Best Sellers</h2></div><button class="text-btn" data-page="shop">See all →</button></div>
+          <div class="product-grid" id="bestSellerGrid"></div>
+        </div>
+      </div>
+
+      <div class="section container">
+        <div class="offer-banner">
+          <div><span class="eyebrow">SPECIAL OFFER</span><h2>Fresh deals for your kitchen.</h2><p>Save on selected everyday essentials this week.</p></div>
+          <button class="primary-btn" data-page="shop">Explore Deals</button>
+        </div>
+      </div>
+
+      <div class="section container">
+        <div class="features">
+          <div class="feature"><span>🚚</span><div><b>Local Delivery</b><p>Convenient doorstep delivery.</p></div></div>
+          <div class="feature"><span>💳</span><div><b>COD & UPI</b><p>Pay the way you prefer.</p></div></div>
+          <div class="feature"><span>💬</span><div><b>Direct WhatsApp</b><p>Order directly with the shop.</p></div></div>
+          <div class="feature"><span>🔒</span><div><b>Simple Checkout</b><p>No unnecessary sign-ups.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SHOP -->
+    <section id="shopPage" class="page">
+      <div class="container page-top">
+        <span class="eyebrow">OUR STORE</span><h1>Shop groceries</h1>
+        <div class="shop-toolbar">
+          <div class="category-pills" id="categoryPills"></div>
+          <select id="sortSelect" aria-label="Sort products">
+            <option value="featured">Featured</option><option value="priceLow">Price: Low to High</option>
+            <option value="priceHigh">Price: High to Low</option><option value="name">Name</option>
+          </select>
+        </div>
+        <div class="product-grid" id="shopGrid"></div>
+        <div id="noProducts" class="empty-state hidden"><div>🔎</div><h3>No products found</h3><p>Try another search or category.</p></div>
+      </div>
+    </section>
+
+    <!-- PRODUCT -->
+    <section id="productPage" class="page">
+      <div class="container page-top" id="productDetails"></div>
+    </section>
+
+    <!-- CART -->
+    <section id="cartPage" class="page">
+      <div class="container page-top">
+        <span class="eyebrow">YOUR ORDER</span><h1>Shopping cart</h1>
+        <div id="cartContent"></div>
+      </div>
+    </section>
+
+    <!-- CHECKOUT -->
+    <section id="checkoutPage" class="page">
+      <div class="container page-top">
+        <span class="eyebrow">CHECKOUT</span><h1>Complete your order</h1>
+        <div class="checkout-layout">
+          <form id="checkoutForm" class="card form-card">
+            <h2>Delivery details</h2>
+            <div class="form-grid">
+              <label>Full Name<input required name="name" autocomplete="name" placeholder="Your full name"></label>
+              <label>Mobile Number<input required name="mobile" inputmode="tel" pattern="[0-9 +()-]{10,}" placeholder="10-digit mobile"></label>
+              <label>WhatsApp Number<input required name="whatsapp" inputmode="tel" placeholder="WhatsApp number"></label>
+              <label>PIN Code<input required name="pin" inputmode="numeric" pattern="[0-9]{6}" placeholder="6-digit PIN"></label>
+              <label class="full">Complete Delivery Address<textarea required name="address" rows="3" placeholder="House no., street, landmark"></textarea></label>
+              <label>Village / Area<input required name="area" placeholder="Village or area"></label>
+              <label>City<input required name="city" placeholder="City"></label>
+              <label>District<input required name="district" placeholder="District"></label>
+              <label>State<input required name="state" value="Bihar"></label>
+              <label class="full">Delivery Instructions<textarea name="instructions" rows="2" placeholder="Optional"></textarea></label>
+            </div>
+            <h2 class="mt">Payment method</h2>
+            <div class="payment-options">
+              <label class="payment-option"><input type="radio" name="payment" value="COD" checked><span>💵</span><b>Cash on Delivery</b></label>
+              <label class="payment-option"><input type="radio" name="payment" value="UPI"><span>📱</span><b>UPI</b></label>
+            </div>
+            <div id="upiBox" class="upi-box hidden">
+              <b>Pay using UPI</b><p>UPI ID: <strong id="upiIdDisplay"></strong></p>
+              <div id="qrCode"></div>
+              <a id="upiLink" class="secondary-btn" href="#">Open UPI App</a>
+              <small>Payment confirmation must be verified by the shop. This website does not claim payment success automatically.</small>
+            </div>
+            <button class="primary-btn full-btn" type="submit">Place Order →</button>
+          </form>
+          <aside class="card order-summary" id="checkoutSummary"></aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONFIRMATION -->
+    <section id="confirmationPage" class="page">
+      <div class="container page-top">
+        <div id="confirmationContent"></div>
+      </div>
+    </section>
+
+    <!-- TRACK -->
+    <section id="trackPage" class="page">
+      <div class="container page-top">
+        <span class="eyebrow">ORDER TRACKING</span><h1>Track your order</h1>
+        <form id="trackForm" class="track-form"><input id="trackId" placeholder="Enter Order ID e.g. AK-20261006-1234" required><button class="primary-btn">Track</button></form>
+        <div id="trackResult"></div>
+      </div>
+    </section>
+
+    <!-- ADMIN -->
+    <section id="adminPage" class="page">
+      <div class="container page-top">
+        <span class="eyebrow">SHOP OWNER</span><h1>Local admin dashboard</h1>
+        <div class="warning"><b>Important:</b> This demo admin uses localStorage only. It is <strong>not secure</strong> for a real multi-user production store. Use a real backend/authentication before handling sensitive business data.</div>
+        <div class="admin-tabs">
+          <button class="admin-tab active" data-admin-tab="products">Products</button>
+          <button class="admin-tab" data-admin-tab="orders">Orders</button>
+        </div>
+        <div id="adminProducts" class="admin-panel"></div>
+        <div id="adminOrders" class="admin-panel hidden"></div>
+      </div>
+    </section>
+  </main>
+
+  <nav class="bottom-nav">
+    <a href="#home" data-page="home">⌂<span>Home</span></a>
+    <a href="#shop" data-page="shop">▦<span>Shop</span></a>
+    <a href="#cart" data-page="cart" class="bottom-cart">🛒<span>Cart</span><i id="bottomCartCount">0</i></a>
+    <a href="#track" data-page="track">◷<span>Track</span></a>
+  </nav>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div><div class="brand footer-brand"><span class="brand-mark">🛒</span><span><b>Apni Kirana</b><small>Fresh • Fast • Local</small></span></div><p>Everyday groceries from your local shop, ordered directly.</p></div>
+      <div><h4>Quick Links</h4><a data-page="shop">Shop</a><a data-page="track">Track Order</a><a data-page="admin">Shop Owner</a></div>
+      <div><h4>Support</h4><p>📞 <span id="shopPhoneText">Add your number</span></p><p>💬 WhatsApp support</p><p>🚚 Local delivery</p></div>
+      <div><h4>Policies</h4><a href="#" onclick="return false">Terms</a><a href="#" onclick="return false">Privacy</a><a href="#" onclick="return false">Refund Policy</a></div>
+    </div>
+    <div class="footer-bottom">© <span id="year"></span> Apni Kirana. All rights reserved.</div>
+  </footer>
+
+  <div id="menuOverlay" class="menu-overlay hidden">
+    <div class="side-menu">
+      <button class="close-menu" id="closeMenu">×</button>
+      <div class="brand"><span class="brand-mark">🛒</span><span><b>Apni Kirana</b><small>Fresh • Fast • Local</small></span></div>
+      <a data-page="home">Home</a><a data-page="shop">Shop</a><a data-page="track">Track Order</a><a data-page="admin">Shop Owner</a>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
